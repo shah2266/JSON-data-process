@@ -8,6 +8,7 @@ class QueryFunctions
         $this->connection = $db->createConnection();
     }
 
+    // Insert json data into the database
     public function insert_data($data)
     {
         foreach ($data as $item) {
@@ -45,6 +46,7 @@ class QueryFunctions
         }
     }
 
+    // Get existing participation ids from the database
     public function get_existing_participation_ids(): array
     {
         $ids = array();
