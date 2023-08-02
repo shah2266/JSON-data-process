@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,9 @@
             box-sizing: border-box;
         }
 
-        *, *:before, *:after {
+        *,
+        *:before,
+        *:after {
             box-sizing: inherit;
         }
 
@@ -25,6 +28,7 @@
             font-size: 15px;
             line-height: 1.5;
         }
+
         .content-wrap {
             max-width: 980px;
             width: 85%;
@@ -39,11 +43,13 @@
             border: 1px solid #fff;
             cursor: pointer;
         }
+
         select:hover {
             background-color: #e3e2e2;
             border: 1px solid #d9d9d9;
             transition: 0.3s;
         }
+
         button {
             background-color: #347e2a;
             padding: 5px 15px;
@@ -51,17 +57,20 @@
             color: #fff;
             border: 1px solid #3d8633;
         }
+
         button:hover {
             background-color: #3d8633;
             transition: 0.3s;
         }
+
         table {
             background-color: #fff;
             border-collapse: collapse;
             width: 100%;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #ccc;
             text-align: left;
             padding: 8px;
@@ -71,80 +80,108 @@
             background-color: #eefeff;
             font-size: 15px;
         }
-
     </style>
 </head>
+
 <body>
-<header>
-    <div class="content-wrap">
-        <h1>Event booking system</h1>
-    </div>
-</header>
-<section>
-    <div class="content-wrap">
-        <form method="post">
-            <label for="employee_name">Employee Name:</label>
-            <select name="employee_name" id="employee_name">
-                <option value="">All</option>
-                <?php foreach ($unique_data['employee_name'] as $name) : ?>
-                <option value="<?php echo $name; ?>" <?php if (isset($filterData['employee_name']) && $filterData['employee_name'] === $name) echo 'selected'; ?>><?php echo $name; ?></option>
-                <?php endforeach; ?>
-            </select>
+    <header>
+        <div class="content-wrap">
+            <h1>Event booking system</h1>
+        </div>
+    </header>
+    <section>
+        <div class="content-wrap">
+            <form method="post">
+                <label for="employee_name">Employee Name:</label>
+                <select name="employee_name" id="employee_name">
+                    <option value="">All</option>
+                    <?php foreach ($unique_data['employee_name'] as $name) : ?>
+                    <option value="<?php echo $name; ?>" <?php if (isset($filterData['employee_name']) &&
+                        $filterData['employee_name']===$name) echo 'selected' ; ?>>
+                        <?php echo $name; ?>
+                    </option>
+                    <?php endforeach; ?>
+                </select>
 
-            <label for="event_name">Event Name:</label>
-            <select name="event_name" id="event_name">
-                <option value="">All</option>
-                <?php foreach ($unique_data['event_name'] as $name) : ?>
-                <option value="<?php echo $name; ?>" <?php if (isset($filterData['event_name']) && $filterData['event_name'] === $name) echo 'selected'; ?>><?php echo $name; ?></option>
-                <?php endforeach; ?>
-            </select>
+                <label for="event_name">Event Name:</label>
+                <select name="event_name" id="event_name">
+                    <option value="">All</option>
+                    <?php foreach ($unique_data['event_name'] as $name) : ?>
+                    <option value="<?php echo $name; ?>" <?php if (isset($filterData['event_name']) &&
+                        $filterData['event_name']===$name) echo 'selected' ; ?>>
+                        <?php echo $name; ?>
+                    </option>
+                    <?php endforeach; ?>
+                </select>
 
-            <label for="event_date">Event Date:</label>
-            <select name="event_date" id="event_date">
-                <option value="">All</option>
-                <?php foreach ($unique_data['event_date'] as $date) : ?>
-                <option value="<?php echo $date; ?>" <?php if (isset($filterData['event_date']) && $filterData['event_date'] === $date) echo 'selected'; ?>><?php echo $date; ?></option>
+                <label for="event_date">Event Date:</label>
+                <select name="event_date" id="event_date">
+                    <option value="">All</option>
+                    <?php foreach ($unique_data['event_date'] as $date) : ?>
+                    <option value="<?php echo $date; ?>" <?php if (isset($filterData['event_date']) &&
+                        $filterData['event_date']===$date) echo 'selected' ; ?>>
+                        <?php echo $date; ?>
+                    </option>
+                    <?php endforeach; ?>
+                </select>
+                <button type="submit">Filter</button>
+            </form>
+        </div>
+    </section>
+    <section>
+        <div class="content-wrap">
+            <?php if (isset($data) && !empty($data)) : ?>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Employee Name</th>
+                    <th>Employee Mail</th>
+                    <th>Event ID</th>
+                    <th>Event Name</th>
+                    <th>Fee</th>
+                    <th>Event Date</th>
+                    <th>Version</th>
+                </tr>
+                <?php foreach ($data as $row) : ?>
+                <tr>
+                    <td>
+                        <?php echo $row['participation_id']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['employee_name']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['employee_mail']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['event_id']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['event_name']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['participation_fee']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['event_date']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['version']; ?>
+                    </td>
+                </tr>
                 <?php endforeach; ?>
-            </select>
-            <button type="submit">Filter</button>
-        </form>
-    </div>
-</section>
-<section>
-    <div class="content-wrap">
-        <?php if (isset($data) && !empty($data)) : ?>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Employee Name</th>
-                <th>Employee Mail</th>
-                <th>Event ID</th>
-                <th>Event Name</th>
-                <th>Fee</th>
-                <th>Event Date</th>
-                <th>Version</th>
-            </tr>
-            <?php foreach ($data as $row) : ?>
-            <tr>
-                <td><?php echo $row['participation_id']; ?></td>
-                <td><?php echo $row['employee_name']; ?></td>
-                <td><?php echo $row['employee_mail']; ?></td>
-                <td><?php echo $row['event_id']; ?></td>
-                <td><?php echo $row['event_name']; ?></td>
-                <td><?php echo $row['participation_fee']; ?></td>
-                <td><?php echo $row['event_date']; ?></td>
-                <td><?php echo $row['version']; ?></td>
-            </tr>
-            <?php endforeach; ?>
-            <tr>
-                <td colspan="5" style="text-align: left;"><strong>Total Price:</strong></td>
-                <td colspan="3"><strong><?php echo number_format($total_price, 2); ?></strong></td>
-            </tr>
-        </table>
-        <?php else : ?>
-        <p>No data available.</p>
-        <?php endif; ?>
-    </div>
-</section>
+                <tr>
+                    <td colspan="5" style="text-align: left;"><strong>Total Price:</strong></td>
+                    <td colspan="3"><strong>
+                            <?php echo number_format($total_price, 2); ?>
+                        </strong></td>
+                </tr>
+            </table>
+            <?php else : ?>
+            <p>No data available.</p>
+            <?php endif; ?>
+        </div>
+    </section>
 </body>
+
 </html>
